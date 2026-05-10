@@ -1,0 +1,34 @@
+Le CRD : lit les CR et permet à Argo Rollout de prendre des décision en surveillant le namespace
+kubectl.exe create ns argo-rollouts
+
+
+
+
+
+Deployment K8s classique          Argo Rollouts
+─────────────────────────         ─────────────────────────
+v1 → v2 : bascule brutale         v1 → v2 : bascule contrôlée
+Pas de preview                    Preview testable avant promo
+Rollback manuel                   Rollback automatique
+Aucune analyse de métriques       Analyse Dynatrace/Prometheus
+
+
+
+┌─────────────────┐
+USERS ──────────────► vote (active)   │ ← port 30000 (prod)
+                    │ image: v1 BLUE  │
+                    └─────────────────┘
+
+                    ┌─────────────────┐
+QA/Tests ───────────► vote-preview    │ ← port 30100 (preview)
+                    │ image: v2 GREEN │
+                    └─────────────────┘
+
+        Après validation → kubectl argo rollouts promote vote
+
+USERS ──┬── 90% ──► v1 (stable)
+        └── 10% ──► v2 (canary)
+              ↓
+        analyse métriques
+              ↓
+        promote → 100% v2
