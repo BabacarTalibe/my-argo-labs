@@ -11,7 +11,7 @@ spec:
     port: 80
     protocol: TCP
     targetPort: 80
-    nodePort: 30100
+    nodePort: 30600
   selector:
     app: vote
   type: NodePort

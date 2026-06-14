@@ -15,11 +15,12 @@ spec:
     spec:
       containers:
       - name: vote
-        image: dockersamples/examplevotingapp_vote:after
+        image: dockersamples/examplevotingapp_vote:latest
         ports:
         - containerPort: 80
   strategy:
     blueGreen:
+      autoPromotionEnabled: true
+      autoPromotionSeconds: 30
       activeService: vote
       previewService: vote-preview
-      autoPromotionEnabled: false   # ← tu valides manuellement

@@ -10,4 +10,6 @@ labels:
   pairs:
     project: instavote
 patches:
-- path: service.yaml
+- path: staging-service.yaml
+- path: staging-preview-service.yaml
+- path: staging-vote-rollout.yaml
