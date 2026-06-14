@@ -4,7 +4,7 @@ kind: Rollout
 metadata:
   name: vote
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: vote
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: vote
-        image: dockersamples/examplevotingapp_vote:latest
+        image: dockersamples/examplevotingapp_vote:after
         ports:
         - containerPort: 80
   strategy:
